@@ -18,7 +18,7 @@ Anthropomorpic cat that looks like jon snow
 Ben shapiro as a guest star on seinfeld
 ![](sample_images/ben%20shapiro%20as%20a%20guest%20star%20on%20seinfeld.png)
 
-Santa claus fighting in the vietnam was
+Santa claus fighting in the vietnam war
 ![](sample_images/santa%20claus%20fighting%20in%20the%20vietnam%20war..png)
 
 Shirtless michael myers at mcdonalds
