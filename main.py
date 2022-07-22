@@ -21,7 +21,7 @@ def main():
     response = call_dalle_api(prompt)
     image_grid = images_to_grid(response)
 
-    # image_grid.show()
+    image_grid.show()
 
     image_grid.save(f"{prompt}.png")
 

@@ -2,6 +2,7 @@ from glob import glob
 import io
 import numpy as np
 import pandas as pd
+import re
 from PIL import Image
 
 
@@ -49,3 +50,9 @@ def commentscraper_csv_to_corpus(data_dir, corpus_path):
 
     with open(corpus_path, "w", encoding="utf8") as f:
         f.write("\n".join(corpus).lower())
+
+
+def clean_prompt(prompt):
+    """ Removes tokens that can not be used in filename from prompt. """
+    pattern = r"[^\s\d\w]"
+    return re.sub(pattern, '', prompt)
