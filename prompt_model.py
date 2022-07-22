@@ -5,7 +5,7 @@ class PromptModel:
     def __init__(self):
         self.model = None
 
-    def fit_model(self, corpus_path, state_size=3):
+    def fit(self, corpus_path, state_size=3):
         """ """
         corpus = self.load_data(corpus_path)
 
