@@ -1,3 +1,5 @@
+import io
+import logging
 from api_call import call_dalle_api
 from prompt_model import PromptModel
 from twitter_api import TwitterAPI
@@ -33,26 +35,37 @@ class DalleBot:
         return prompt
 
     def make_tweet(self, prompt=None):
+        """ Generates promt from promp model, calls DalleMini api, and posts returned images as tweet. """
         # Random prompt if nothing passed, otherwise we use
         # passed prompt
         if prompt is None:
             prompt = self.generate_prompt()
 
-        # Calls api and saves returned image to disk
-        self.generate_image(prompt)
+        # Calls api and returns image as bytes
+        image_bytes = self.generate_image(prompt)
 
         # Use twitter api to post image
         self.twitter_api.post_tweet(
             status=f"{prompt} #dalle #dalle2 #dallemini #bot",
-            filename=f"{prompt}.png"
+            filename=f"{prompt}.png",
+            file=image_bytes
         )
+
+        logging.info("Succesfully posted tweet")
 
     @staticmethod
     def generate_image(prompt=None):
         """
-        Calls dalle api with passed prompt. Image response is saved
-        in file named <<prompt>>.png
+        Calls dalle api with passed prompt. Returns image as bytes
+        to prevent saving and loading file to disk.
         """
         dalle_api_response = call_dalle_api(prompt)
         image_grid = images_to_grid(dalle_api_response)
-        image_grid.save(f"{prompt}.png")
+
+        # Turn image into bytes to prevent having to save and load image from local disk (cant do this in serverless environment)
+        image_io = io.BytesIO()
+        image_grid.save(image_io, format="png")
+        # Get bytes from io object
+        image_bytes = image_io.getvalue()
+
+        return image_bytes

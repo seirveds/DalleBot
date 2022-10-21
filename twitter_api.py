@@ -18,8 +18,8 @@ class TwitterAPI:
         )
         return tweepy.API(auth_token)
 
-    def post_tweet(self, status, filename):
-        self.api.update_status_with_media(status=status, filename=filename)
+    def post_tweet(self, status, filename, file):
+        self.api.update_status_with_media(status=status, filename=filename, file=file)
 
 if __name__ == "__main__":
     api = TwitterAPI()
