@@ -5,8 +5,6 @@ import pandas as pd
 import re
 from PIL import Image
 
-import matplotlib.pyplot as plt
-
 
 def images_to_grid(images, n_rows=3, n_cols=3, padding=10):
     """ Transform base64 images to numpy arrays, and puts them on a 3 by 3 grid in a single image. """
